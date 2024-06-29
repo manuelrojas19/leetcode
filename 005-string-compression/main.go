@@ -18,26 +18,25 @@ import (
 
 func compress(chars []byte) int {
 	// Initialize variables
-	j := 0     // Pointer to current position in result array
+	right := 0 // Pointer to current position in result array
 	count := 1 // Count of consecutive characters
 
 	// Iterate through the array
-	for i := 1; i <= len(chars); i++ {
+	for left := 0; left < len(chars); left++ {
 		// Check if current character is different from previous one or end of array
-		if i == len(chars) || chars[i] != chars[i-1] {
+		if left == len(chars)-1 || chars[left] != chars[left+1] {
 			// Assign current character to result array
-			chars[j] = chars[i-1]
-			j++
+			chars[right] = chars[left]
+			right++
 
 			// Append count if greater than 1
 			if count > 1 {
 				countStr := strconv.Itoa(count) // Convert count to string
 				for _, ch := range countStr {
-					chars[j] = byte(ch) // Append each character of count string
-					j++
+					chars[right] = byte(ch) // Append each character of count string
+					right++
 				}
 			}
-
 			// Reset count for new character group
 			count = 1
 		} else {
@@ -47,7 +46,7 @@ func compress(chars []byte) int {
 	}
 
 	// Return length of compressed array
-	return j
+	return right
 }
 
 func main() {
