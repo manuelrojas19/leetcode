@@ -11,15 +11,15 @@ type ListNode struct {
 	Next *ListNode
 }
 
-func mergeTwoListsRecursive(list1 *ListNode, list2 *ListNode) *ListNode {
+func mergeTwoSortedListsRecursive(list1 *ListNode, list2 *ListNode) *ListNode {
 
 	if list1 != nil && list2 != nil {
 
 		if list1.Val < list2.Val {
-			list1.Next = mergeTwoListsRecursive(list1.Next, list2)
+			list1.Next = mergeTwoSortedListsRecursive(list1.Next, list2)
 			return list1
 		}
-		list2.Next = mergeTwoListsRecursive(list2.Next, list1)
+		list2.Next = mergeTwoSortedListsRecursive(list2.Next, list1)
 		return list2
 	}
 
@@ -29,7 +29,7 @@ func mergeTwoListsRecursive(list1 *ListNode, list2 *ListNode) *ListNode {
 	return list1
 }
 
-func mergeTwoListsIterative(list1 *ListNode, list2 *ListNode) *ListNode {
+func mergeTwoSortedListsIterative(list1 *ListNode, list2 *ListNode) *ListNode {
 
 	dummyHead := &ListNode{}
 	currentNode := dummyHead
